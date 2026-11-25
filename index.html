@@ -1,0 +1,460 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Baptiste Noailhac · Data & IA</title>
+<meta name="description" content="Baptiste Noailhac, élève ingénieur Data & IA à l'ESILV. Projets de données et d'IA mesurés contre une baseline. Stage de 4 à 5 mois, dès avril 2027.">
+<meta property="og:title" content="Baptiste Noailhac · Data & IA">
+<meta property="og:description" content="Élève ingénieur Data & IA à l'ESILV. Projets, expérience, contact.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://baptistenoai.github.io/">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23161615'/%3E%3Ctext x='16' y='22' font-family='Arial' font-weight='700' font-size='15' fill='%23fff' text-anchor='middle'%3EBN%3C/text%3E%3C/svg%3E">
+<style>
+@font-face{font-family:"DM Sans";src:url(assets/fonts/DMSans_400Regular.ttf) format("truetype");font-weight:400;font-display:swap}
+@font-face{font-family:"DM Sans";src:url(assets/fonts/DMSans_500Medium.ttf) format("truetype");font-weight:500;font-display:swap}
+@font-face{font-family:"DM Sans";src:url(assets/fonts/DMSans_700Bold.ttf) format("truetype");font-weight:700;font-display:swap}
+:root{
+  --bg:#fbfbf9;--card:#ffffff;--ink:#161615;--ink-2:#45453f;--muted:#6b6b64;--line:#e4e3dd;
+  --accent:#2d55c4;--accent-soft:#e9eefb;--bar:#c8c7c0;--code:#f3f2ee;
+  --r:14px;--w:880px;
+}
+@media (prefers-color-scheme:dark){:root{
+  --bg:#121211;--card:#1b1b19;--ink:#ededea;--ink-2:#c4c4be;--muted:#9a9a92;--line:#2e2e2b;
+  --accent:#86a6ff;--accent-soft:#1e2640;--bar:#4a4a46;--code:#232320;
+}}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 17px/1.6 "DM Sans",system-ui,-apple-system,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration-color:var(--line);text-underline-offset:3px}
+a:hover{text-decoration-color:currentColor}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:6px}
+.wrap{max-width:var(--w);margin:0 auto;padding:0 22px}
+
+/* barre du haut */
+nav.top{position:sticky;top:0;z-index:10;background:color-mix(in srgb,var(--bg) 86%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+nav.top .wrap{display:flex;align-items:center;gap:22px;height:56px;font-size:15px}
+nav.top .name{font-weight:700;text-decoration:none;margin-right:auto}
+nav.top a:not(.name){text-decoration:none;color:var(--muted)}
+nav.top a:not(.name):hover{color:var(--ink)}
+@media (max-width:640px){nav.top a.opt{display:none}}
+
+/* accroche */
+.hero{padding:88px 0 56px}
+.hero h1{font-size:clamp(34px,6vw,54px);line-height:1.08;letter-spacing:-.02em;margin:0 0 20px;font-weight:700}
+.hero p{font-size:20px;color:var(--ink-2);max-width:640px;margin:0 0 14px}
+.status{display:inline-flex;align-items:center;gap:9px;font-size:15px;font-weight:500;background:var(--accent-soft);color:var(--ink);padding:7px 14px;border-radius:99px;margin:6px 0 28px}
+.status i{width:8px;height:8px;border-radius:50%;background:var(--accent)}
+.btns{display:flex;flex-wrap:wrap;gap:10px}
+.btn{display:inline-flex;align-items:center;gap:6px;padding:10px 18px;border-radius:99px;border:1px solid var(--line);background:var(--card);text-decoration:none;font-weight:500;font-size:15px;cursor:pointer;color:var(--ink);font-family:inherit}
+.btn.main{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.btn:hover{border-color:var(--ink)}
+
+/* sections */
+section{padding:56px 0;border-top:1px solid var(--line)}
+section > .wrap > h2{font-size:28px;letter-spacing:-.01em;margin:0 0 6px}
+.sub{color:var(--muted);margin:0 0 30px}
+
+/* fiches projets */
+details.proj{background:var(--card);border:1px solid var(--line);border-radius:var(--r);margin:0 0 16px;overflow:hidden}
+details.proj[open]{border-color:var(--ink-2)}
+details.proj summary{list-style:none;cursor:pointer;padding:24px 26px;display:grid;grid-template-columns:1fr auto;gap:4px 18px;align-items:start}
+details.proj summary::-webkit-details-marker{display:none}
+summary h3{margin:0;font-size:21px;line-height:1.3}
+summary .desc{grid-column:1;color:var(--ink-2);margin:4px 0 0}
+summary .meta{grid-column:1;color:var(--muted);font-size:14px;margin-top:6px}
+summary .tog{grid-row:1/span 3;grid-column:2;align-self:center;width:34px;height:34px;border-radius:50%;border:1px solid var(--line);display:grid;place-items:center;font-size:20px;color:var(--muted);transition:transform .2s}
+details[open] summary .tog{transform:rotate(45deg)}
+.body{padding:0 26px 28px;border-top:1px solid var(--line)}
+.body h4{font-size:15px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin:28px 0 8px}
+.body p{margin:0 0 12px;color:var(--ink-2)}
+.body p.lead{font-size:19px;color:var(--ink);margin-top:22px}
+.body ul{margin:0 0 12px;padding-left:20px;color:var(--ink-2)}
+.body li{margin:4px 0}
+.nums{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin:8px 0 6px;padding:0}
+.nums div{background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:16px}
+.nums b{display:block;font-size:30px;line-height:1.1;letter-spacing:-.02em;margin-bottom:6px}
+.nums span{font-size:15px;color:var(--ink-2)}
+.surprise{background:var(--accent-soft);border-radius:12px;padding:16px 18px;margin:18px 0}
+.surprise strong{display:block;margin-bottom:4px}
+.surprise p{margin:0;color:var(--ink)}
+.how{font-size:15px;color:var(--muted);border-left:3px solid var(--line);padding-left:12px;margin:18px 0 0}
+.links{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0 0;padding:0;list-style:none}
+.chips li{font-size:13px;padding:3px 10px;border-radius:99px;background:var(--code);color:var(--ink-2)}
+
+/* graphiques */
+figure{margin:16px 0;padding:16px 18px;background:var(--bg);border:1px solid var(--line);border-radius:12px}
+figure svg{width:100%;height:auto;display:block}
+figcaption{font-size:14px;color:var(--muted);margin-top:8px}
+.chart text{font-family:inherit;fill:var(--ink-2);font-size:13px}
+.chart text.v{fill:var(--ink);font-weight:500}
+.chart .bar{fill:var(--bar)}
+.chart .bar.hi{fill:var(--accent)}
+.chart .axis{stroke:var(--line)}
+.chart g:hover .bar{opacity:.85}
+
+/* schémas de flux */
+.flow{display:flex;flex-direction:column;gap:0;margin:16px 0;padding:0;list-style:none;counter-reset:f}
+.flow li{position:relative;background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:12px 14px;margin-bottom:26px;font-size:15px;color:var(--ink-2)}
+.flow li:last-child{margin-bottom:0}
+.flow li b{color:var(--ink);display:block}
+.flow li:not(:last-child)::after{content:"↓";position:absolute;left:50%;bottom:-24px;transform:translateX(-50%);color:var(--muted)}
+.flow .two{display:grid;grid-template-columns:1fr 1fr;gap:10px;background:none;border:0;padding:0}
+.flow .two > div{background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:12px 14px}
+@media (max-width:560px){.flow .two{grid-template-columns:1fr}}
+
+/* cartes */
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:14px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:20px 22px;display:flex;flex-direction:column}
+.card h3{font-size:18px;margin:0 0 4px;line-height:1.3}
+.card .meta{font-size:14px;color:var(--muted);margin-bottom:10px}
+.card p{margin:0 0 10px;color:var(--ink-2);font-size:16px}
+.card .big{font-size:26px;font-weight:700;letter-spacing:-.02em;color:var(--ink);margin:4px 0 2px}
+.card a.more{margin-top:auto;font-size:15px;font-weight:500}
+
+/* en cours */
+.now{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:24px 26px}
+.now h3{margin:0 0 4px;font-size:20px}
+.now p{color:var(--ink-2);margin:8px 0}
+.tag{display:inline-block;font-size:13px;font-weight:500;padding:2px 10px;border-radius:99px;background:var(--accent-soft);margin-bottom:8px}
+
+/* parcours */
+.tl{list-style:none;margin:0;padding:0}
+.tl li{display:grid;grid-template-columns:150px 1fr;gap:18px;padding:18px 0;border-bottom:1px solid var(--line)}
+.tl li:last-child{border-bottom:0}
+.tl .when{color:var(--muted);font-size:15px;padding-top:2px}
+.tl h3{margin:0;font-size:18px}
+.tl .org{color:var(--ink-2);margin:2px 0 6px}
+.tl p{margin:0;color:var(--ink-2);font-size:16px}
+@media (max-width:560px){.tl li{grid-template-columns:1fr;gap:2px}}
+h2.small{font-size:22px;margin:44px 0 6px}
+
+.skills{display:grid;gap:0}
+.skills div{display:grid;grid-template-columns:180px 1fr;gap:18px;padding:14px 0;border-bottom:1px solid var(--line)}
+.skills div:last-child{border-bottom:0}
+.skills b{font-weight:500}
+.skills span{color:var(--ink-2)}
+@media (max-width:560px){.skills div{grid-template-columns:1fr;gap:2px}}
+
+/* contact */
+.contact h2{font-size:clamp(30px,5vw,44px)!important}
+.mail{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin:22px 0 18px;font-size:20px;font-weight:500}
+footer{padding:30px 0 50px;color:var(--muted);font-size:14px}
+</style>
+</head>
+<body>
+
+<nav class="top" aria-label="Navigation">
+  <div class="wrap">
+    <a class="name" href="#top">Baptiste Noailhac</a>
+    <a href="#projets">Projets</a>
+    <a class="opt" href="#parcours">Parcours</a>
+    <a class="opt" href="#competences">Compétences</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
+
+<main id="top">
+<header class="hero">
+  <div class="wrap">
+    <h1>Bonjour, je suis Baptiste.</h1>
+    <p>Élève ingénieur en 4e année à l'ESILV, majeure Data & IA. Je construis des pipelines de données et je mesure mes modèles contre une baseline avant de leur faire confiance, y compris quand c'est un LLM.</p>
+    <div class="status"><i></i>Je cherche un stage de 4e année de 4 à 5 mois, dès avril 2027</div>
+    <div class="btns">
+      <a class="btn main" href="#projets">Voir mes projets</a>
+      <a class="btn" href="#contact">Me contacter</a>
+      <a class="btn" href="https://github.com/BaptisteNoai">GitHub ↗</a>
+      <a class="btn" href="https://www.linkedin.com/in/baptiste-noailhac-b60908317">LinkedIn ↗</a>
+    </div>
+  </div>
+</header>
+
+<section id="projets">
+  <div class="wrap">
+    <h2>Projets phares</h2>
+    <p class="sub">Trois projets personnels, avec leurs chiffres et leurs limites. Ouvrez une fiche pour le détail.</p>
+
+    <!-- 1. Rapprochement -->
+    <details class="proj">
+      <summary>
+        <h3>Règles contre LLM, mesurés sur 200 annonces annotées</h3>
+        <p class="desc">Relier une annonce de vélo d'occasion au bon modèle d'un catalogue : un petit LLM local fait-il mieux qu'une règle simple ?</p>
+        <p class="meta">Nov. 2026 · projet personnel · Python, Ollama, Pydantic, FastAPI</p>
+        <span class="tog" aria-hidden="true">+</span>
+      </summary>
+      <div class="body">
+        <p class="lead">Sur 100 annonces de test, la règle simple fait 75 % de bonnes réponses. Le LLM seul en fait 30 %.</p>
+        <h4>Le problème</h4>
+        <p>Les particuliers qui vendent un vélo électrique sur buycycle écrivent le nom du modèle à leur façon. Pour comparer un jour leurs prix à ceux du revendeur, il faut relier chacune des 1 856 annonces à l'un des 3 422 modèles-années de mon catalogue, ou dire qu'il n'y est pas.</p>
+        <h4>La méthode</h4>
+        <ul>
+          <li>200 annonces annotées par moi, avec une consigne écrite : le bon modèle, ou « aucun ».</li>
+          <li>Un découpage fixe : 100 annonces pour régler les méthodes, 100 mises de côté pour la mesure finale.</li>
+          <li>Quatre méthodes comparées : une baseline de similarité de chaînes (rapidfuzz), une règle qui exige les mêmes numéros de version (batterie et taille de roue ignorées), un LLM local qwen2.5:3b via Ollama dont la sortie JSON est validée par Pydantic, et un hybride où la règle propose et le LLM vérifie.</li>
+        </ul>
+        <figure>
+          <svg class="chart" viewBox="0 0 600 176" role="img" aria-labelledby="c1t">
+            <title id="c1t">Exactitude sur les 100 annonces de test : règle de version 75 %, baseline 75 %, hybride 63 %, LLM seul 30 %.</title>
+            <line class="axis" x1="190" y1="8" x2="190" y2="168"/>
+            <g><title>Règle de version : 75 % d'exactitude, 62,9 % de précision</title><text x="180" y="31" text-anchor="end">Règle de version</text><rect class="bar hi" x="190" y="14" width="270" height="24" rx="4"/><text class="v" x="468" y="31">75 % · préc. 62,9 %</text></g>
+            <g><title>Baseline : 75 % d'exactitude, 59,0 % de précision</title><text x="180" y="71" text-anchor="end">Baseline (similarité)</text><rect class="bar" x="190" y="54" width="270" height="24" rx="4"/><text class="v" x="468" y="71">75 % · préc. 59,0 %</text></g>
+            <g><title>Hybride : 63 % d'exactitude, 60,0 % de précision, rappel 14,3 %</title><text x="180" y="111" text-anchor="end">Hybride (règle + LLM)</text><rect class="bar" x="190" y="94" width="227" height="24" rx="4"/><text class="v" x="425" y="111">63 % · préc. 60,0 %</text></g>
+            <g><title>LLM seul : 30 % d'exactitude, 23,3 % de précision</title><text x="180" y="151" text-anchor="end">LLM seul (qwen2.5:3b)</text><rect class="bar" x="190" y="134" width="108" height="24" rx="4"/><text class="v" x="306" y="151">30 % · préc. 23,3 %</text></g>
+          </svg>
+          <figcaption>Exactitude (« aucun » compris) et précision sur les 100 annonces de test, mesurées une seule fois, réglages figés.</figcaption>
+        </figure>
+        <div class="surprise">
+          <strong>Ce que la mesure a montré</strong>
+          <p>Le petit LLM échoue dans les deux sens. Quand il choisit parmi des candidats, il ne dit presque jamais « aucun ». Quand on lui demande seulement de vérifier, il répond presque toujours non : l'hybride ne retrouve plus que 14,3 % des annonces qui ont un modèle au catalogue.</p>
+        </div>
+        <h4>Ce qui est livré</h4>
+        <ul>
+          <li>La règle de version est retenue comme méthode par défaut, servie par une API FastAPI, avec un Dockerfile.</li>
+          <li>Les réponses du LLM sont mises en cache, donc les chiffres se rejouent sans relancer le modèle. Un workflow GitHub Actions est écrit pour rejouer les tests et l'évaluation, et signaler une régression.</li>
+          <li>Limites : 100 annonces de test, un seul annotateur, un seul LLM et un petit. Le rapprochement n'est pas encore branché dans l'Observatoire.</li>
+        </ul>
+        <p class="how">Méthode de travail : la question, l'annotation, le découpage et l'interprétation sont de moi ; le code a été écrit avec Claude Code.</p>
+        <div class="links"><a class="btn" href="https://github.com/BaptisteNoai/rapprochement-annonces-velo">Voir le code ↗</a></div>
+      </div>
+    </details>
+
+    <!-- 2. Observatoire -->
+    <details class="proj">
+      <summary>
+        <h3>Observatoire du vélo électrique d'occasion</h3>
+        <p class="desc">Combien perd un vélo électrique d'occasion par an et par kilomètre, à modèle égal ? Collecte quotidienne, dbt, régression.</p>
+        <p class="meta">Depuis oct. 2026 · projet personnel · Python, dbt, DuckDB, Parquet, pytest</p>
+        <span class="tog" aria-hidden="true">+</span>
+      </summary>
+      <div class="body">
+        <p class="lead">À modèle égal, un vélo électrique perd 3,1 % de sa valeur par an et 3,0 % par 1 000 km.</p>
+        <h4>Le pipeline</h4>
+        <ol class="flow">
+          <li class="two">
+            <div><b>Collecte quotidienne planifiée</b>Flux produits de 2 revendeurs (Upway, Tenways), un instantané Parquet brut par jour, relançable sans doublon.</div>
+            <div><b>Relevé des prix neufs</b>Pages produit Upway, robots.txt respecté, reprise après interruption : 5 264 annonces couvertes sur 5 276.</div>
+          </li>
+          <li><b>dbt + DuckDB</b>Staging pour le nettoyage, puis marts (table de faits des annonces, dimension des modèles). 23 tests de qualité des données.</li>
+          <li><b>Analyse</b>Régression à effets fixes par modèle, puis une formule d'estimation du prix de revente.</li>
+        </ol>
+        <p>Pourquoi garder le brut : un nettoyage se refait, un historique de prix perdu ne se rattrape pas. Chaque choix est daté et justifié dans un journal de décisions.</p>
+        <div class="nums">
+          <div><b>−3,1 %</b><span>par an, à modèle égal, par régression à effets fixes</span></div>
+          <div><b>−3,0 %</b><span>par 1 000 km parcourus</span></div>
+          <div><b>12,7 %</b><span>d'erreur absolue médiane de la formule de prix, sur 1 568 annonces de test</span></div>
+        </div>
+        <div class="surprise">
+          <strong>Le biais de la première mesure</strong>
+          <p>Ma première mesure donnait −5,2 % par an. En la confrontant à une deuxième méthode, j'ai vu qu'elle mélangeait l'usure du vélo et la hausse des prix neufs d'un millésime à l'autre. Comparer au prix neuf du même modèle corrige ce biais.</p>
+        </div>
+        <figure>
+          <svg class="chart" viewBox="0 0 600 96" role="img" aria-labelledby="c2t">
+            <title id="c2t">Décote annuelle : −5,2 % avec la première mesure, −3,1 % à modèle égal.</title>
+            <line class="axis" x1="220" y1="6" x2="220" y2="90"/>
+            <g><title>Première mesure : −5,2 % par an (usure et hausse des prix neufs mêlées)</title><text x="210" y="31" text-anchor="end">1re mesure (prix brut)</text><rect class="bar" x="220" y="14" width="286" height="24" rx="4"/><text class="v" x="514" y="31">−5,2 %/an</text></g>
+            <g><title>À modèle égal : −3,1 % par an</title><text x="210" y="71" text-anchor="end">À modèle égal (retenue)</text><rect class="bar hi" x="220" y="54" width="171" height="24" rx="4"/><text class="v" x="399" y="71">−3,1 %/an</text></g>
+          </svg>
+          <figcaption>Décote annuelle selon la méthode, environ 8 000 annonces et 3 800 modèles-années (début novembre 2026).</figcaption>
+        </figure>
+        <h4>Limites</h4>
+        <ul>
+          <li>Prix de revendeur (Upway), pas de vente entre particuliers : c'est ce que le projet de rapprochement prépare.</li>
+          <li>Le « prix neuf » est le prix catalogue affiché, pas le prix réellement payé.</li>
+        </ul>
+        <p class="how">Méthode de travail : les questions, les choix de données et l'interprétation sont de moi ; le code a été écrit avec Claude Code.</p>
+        <div class="links"><a class="btn" href="https://github.com/BaptisteNoai/observatoire-velo-electrique">Voir le code ↗</a></div>
+      </div>
+    </details>
+
+    <!-- 3. Finance -->
+    <details class="proj">
+      <summary>
+        <h3>Application de suivi financier multi-comptes</h3>
+        <p class="desc">Mes comptes LCL et Trade Republic dans une seule base, où relancer un import ne crée jamais de doublon.</p>
+        <p class="meta">Depuis août 2026 · projet personnel · TypeScript, Next.js, Prisma, SQLite, Python</p>
+        <span class="tog" aria-hidden="true">+</span>
+      </summary>
+      <div class="body">
+        <p class="lead">Un pipeline ETL complet, de deux établissements jusqu'à un tableau de bord, avec une base que j'ai modélisée.</p>
+        <h4>L'architecture</h4>
+        <ol class="flow">
+          <li><b>Extraction en Python</b>Bibliothèques open source woob (LCL) et pytr (Trade Republic). Sortie dans un schéma JSON commun, validé par Pydantic.</li>
+          <li><b>Transformation en TypeScript</b>Même schéma revalidé par Zod, normalisation, dédoublonnage, catégorisation par règles.</li>
+          <li><b>SQLite, modélisée avec Prisma</b>Migrations versionnées, montants en centimes entiers, contraintes d'unicité qui rendent les imports idempotents.</li>
+          <li><b>API REST et tableau de bord</b>15 routes Next.js aux corps JSON validés par Zod ; budgets mensuels avec alerte, décomposition intérêts/capital d'un prêt.</li>
+        </ol>
+        <div class="surprise">
+          <strong>Le bug du double comptage</strong>
+          <p>Certaines opérations LCL apparaissaient deux fois. En cherchant, j'ai vu que leur date change entre l'état « en attente » et l'état « validé » : pour la base, c'étaient deux opérations différentes. Je n'importe plus que les transactions comptabilisées.</p>
+        </div>
+        <h4>Les autres choix</h4>
+        <ul>
+          <li>Une table de liaison entre dépenses et remboursements, même partiels, pour qu'un achat remboursé ne compte pas deux fois ; les virements entre mes propres comptes sont neutralisés.</li>
+          <li>Chaque correction manuelle de catégorie devient une règle, réappliquée aux opérations similaires.</li>
+          <li>Tests de bout en bout avec Playwright, lancés en local, et un journal des décisions techniques.</li>
+        </ul>
+        <p class="how">Méthode de travail : le besoin, les règles de calcul, le diagnostic des erreurs de données et les choix d'architecture sont de moi ; le code a été écrit avec Claude Code comme assistant.</p>
+        <div class="links"><a class="btn" href="https://github.com/BaptisteNoai/gestion-finance">Voir le code ↗</a></div>
+      </div>
+    </details>
+
+    <h2 class="small">Autres projets</h2>
+    <p class="sub">Projets d'école et projet personnel au long cours.</p>
+    <div class="grid">
+      <article class="card">
+        <h3>Prédiction des résultats de Ligue 1</h3>
+        <div class="meta">2025-2026 · ESILV, en binôme · Python, scikit-learn</div>
+        <figure style="margin:4px 0 12px;padding:10px 12px">
+          <svg class="chart" viewBox="0 0 300 76" role="img" aria-labelledby="c3t">
+            <title id="c3t">48 % de bonnes prédictions pour le modèle, 44 % pour la baseline domicile.</title>
+            <g><title>Modèle retenu : 48 %</title><text x="0" y="22">Modèle</text><rect class="bar hi" x="70" y="8" width="168" height="20" rx="4"/><text class="v" x="244" y="23">48 %</text></g>
+            <g><title>Baseline « toujours domicile » : 44 %</title><text x="0" y="60">Baseline</text><rect class="bar" x="70" y="46" width="154" height="20" rx="4"/><text class="v" x="230" y="61">44 %</text></g>
+          </svg>
+        </figure>
+        <p>3 551 matchs depuis 2012-2013, environ 390 000 lignes. Features calculées sur le seul historique antérieur à chaque match, plusieurs modèles (arbre de décision, Random Forest, SVM, ACP + Random Forest) comparés à une baseline qui mise toujours sur l'équipe à domicile, puis les 234 matchs de 2025-2026 prédits journée par journée.</p>
+        <p>Limite assumée : découpage et validation croisée aléatoires, pas chronologiques.</p>
+        <a class="more" href="https://github.com/BaptisteNoai/Projet-Ligue-1">Voir le code ↗</a>
+      </article>
+      <article class="card">
+        <h3>IA générative de confiance : évaluer plusieurs LLM</h3>
+        <div class="meta">Oct. – déc. 2026 · ESILV, groupe de 7 · Python, SQL</div>
+        <p>Le groupe compare des LLM gratuits sur un benchmark SQL à réponses connues, puis combine leurs réponses par vote.</p>
+        <p>Mon rôle dans le groupe, « SQL Diagnostics & Data Integrity » : repérer un faux consensus, des modèles d'accord entre eux sur une réponse fausse, le prouver par des requêtes SQL de vérification, et recompter de façon indépendante le vote codé par l'autre binôme.</p>
+        <a class="more" href="https://github.com/louislefo/nextgen-ai-dia3">Dépôt du groupe ↗</a>
+      </article>
+      <article class="card">
+        <h3>Reconnaissance automatique de plaques</h3>
+        <div class="meta">Janv. – mai 2026 · ESILV, équipe de 6 · Raspberry Pi, Python</div>
+        <p>Un système embarqué de contrôle d'accès pour le parking du campus : une caméra sur Raspberry Pi, des images traitées en Python par vision par ordinateur.</p>
+        <p>J'ai développé le module de reconnaissance, assuré la coordination technique et rédigé le rapport final. Le prototype fonctionne ; il n'a pas été déployé sur le parking.</p>
+      </article>
+      <article class="card">
+        <h3>Vélo Essentiel : un site et ses outils</h3>
+        <div class="meta">Depuis avril 2025 · projet personnel · WordPress, Python</div>
+        <p>Un site de conseil en équipement vélo que je crée et tiens seul : 129 articles et une charte éditoriale écrite (tests honnêtes, sources primaires).</p>
+        <p>Autour, des outils : une veille SEO mensuelle automatisée (API Search Console, sitemaps des concurrents, flux d'affiliation), une synchronisation WordPress versionnée dans Git, et une relecture par un sous-agent Claude Code qui n'a pas écrit l'article et vérifie chaque affirmation sur des sources primaires. Je relis et publie moi-même.</p>
+        <a class="more" href="https://www.veloessentiel.fr/">veloessentiel.fr ↗</a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="en-cours">
+  <div class="wrap">
+    <h2>En ce moment</h2>
+    <p class="sub">Ce que je fais en parallèle des cours cette année.</p>
+    <div class="now">
+      <span class="tag">2026-2027 · sur sélection</span>
+      <h3>Parcours Recherche de l'ESILV</h3>
+      <p>Prévision à court terme d'images de ciel par deep learning. Le projet démarre : la préparation des données est en place, aucun modèle n'est encore entraîné.</p>
+    </div>
+  </div>
+</section>
+
+<section id="parcours">
+  <div class="wrap">
+    <h2>Expérience</h2>
+    <ul class="tl">
+      <li>
+        <div class="when">Depuis 08/2026</div>
+        <div>
+          <h3>Chargé de suivi d'études</h3>
+          <div class="org">DeVinci Junior, Junior-Entreprise de l'ESILV</div>
+          <p>Je suis 2 études d'ingénierie, du lancement à la clôture, comme chef de projet : je fais le lien entre le client et les étudiants qui réalisent la mission, et je contrôle la qualité des livrables et le respect des délais.</p>
+        </div>
+      </li>
+      <li>
+        <div class="when">06/2025 - 08/2025</div>
+        <div>
+          <h3>Stage Contrôle de gestion & analyse de données</h3>
+          <div class="org">Colas (groupe Bouygues), Paris · direction financière</div>
+          <p>Consolidation et analyse des données financières de 7 territoires ultramarins, à partir d'exports Power BI et de Magnitude. Détection d'anomalies (des frais imputés à la mauvaise catégorie), écarts qualifiés avec les responsables financiers, et 5 livrables remis au DAF de zone, dont des recommandations pour harmoniser la remontée des données, qui ont été appliquées.</p>
+        </div>
+      </li>
+      <li>
+        <div class="when">06/2024 - 07/2024</div>
+        <div>
+          <h3>Stage Ingénierie</h3>
+          <div class="org">Stellantis, Vélizy</div>
+          <p>Calculs de résistance des matériaux sur des pièces automobiles sous CATIA, et sélection d'images pour constituer le jeu d'entraînement d'un modèle d'IA interne.</p>
+        </div>
+      </li>
+    </ul>
+
+    <h2 class="small">Formation</h2>
+    <ul class="tl">
+      <li>
+        <div class="when">2023 - 2028</div>
+        <div>
+          <h3>Diplôme d'ingénieur, majeure Data & Intelligence Artificielle</h3>
+          <div class="org">ESILV, Paris La Défense</div>
+          <p>4e année en 2026-2027, Parcours Recherche. Statistiques, algorithmes d'IA, machine learning, deep learning.</p>
+        </div>
+      </li>
+      <li>
+        <div class="when">09/2025 - 01/2026</div>
+        <div>
+          <h3>Semestre d'échange</h3>
+          <div class="org">Dublin, Irlande</div>
+          <p>Cinq mois de cours en anglais, dont un cours de SQL.</p>
+        </div>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<section id="competences">
+  <div class="wrap">
+    <h2>Compétences</h2>
+    <p class="sub">Chacune renvoie à un projet ou une expérience ci-dessus.</p>
+    <div class="skills">
+      <div><b>Data et ML</b><span>Python, pandas, NumPy, scikit-learn, SQL, dbt, DuckDB, Parquet, régression à effets fixes, Matplotlib</span></div>
+      <div><b>LLM et IA</b><span>Ollama, sorties structurées validées par Pydantic, évaluation contre une référence annotée, Claude Code (agents, skills), API Gemini</span></div>
+      <div><b>Développement</b><span>TypeScript, Next.js, React, Tailwind CSS, Prisma, SQLite, FastAPI, API REST, Zod</span></div>
+      <div><b>Qualité</b><span>pytest, Playwright, tests de qualité des données dbt, Git</span></div>
+      <div><b>Gestion et métier</b><span>Excel avancé, Power BI (exploitation de rapports), contrôle de gestion, suivi de projet client</span></div>
+      <div><b>Langues</b><span>Français natif, anglais B2 (TOEIC)</span></div>
+    </div>
+
+    <h2 class="small">En dehors des cours</h2>
+    <div class="skills">
+      <div><b>Tennis</b><span>En compétition depuis 7 ans ; j'ai été classé 15/5.</span></div>
+      <div><b>Cours particuliers</b><span>Maths et physique-chimie, pour des lycéens.</span></div>
+      <div><b>Bourse</b><span>Gestion d'un portefeuille boursier personnel.</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="contact" class="contact">
+  <div class="wrap">
+    <h2>Parlons-en.</h2>
+    <p class="sub">Un stage, une question sur un projet : écrivez-moi.</p>
+    <div class="mail">
+      <a href="mailto:noailhac.baptiste@gmail.com" id="mail">noailhac.baptiste@gmail.com</a>
+      <button class="btn" type="button" id="copy">Copier</button>
+    </div>
+    <div class="btns">
+      <a class="btn" href="https://github.com/BaptisteNoai">GitHub ↗</a>
+      <a class="btn" href="https://www.linkedin.com/in/baptiste-noailhac-b60908317">LinkedIn ↗</a>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer><div class="wrap">© 2026 Baptiste Noailhac</div></footer>
+
+<script>
+document.getElementById('copy').addEventListener('click', e => {
+  navigator.clipboard.writeText(document.getElementById('mail').textContent).then(() => {
+    e.target.textContent = 'Copié';
+    setTimeout(() => e.target.textContent = 'Copier', 1600);
+  });
+});
+// une seule fiche ouverte à la fois
+document.querySelectorAll('details.proj').forEach(d => d.addEventListener('toggle', () => {
+  if (d.open) document.querySelectorAll('details.proj').forEach(o => { if (o !== d) o.open = false; });
+}));
+</script>
+</body>
+</html>
